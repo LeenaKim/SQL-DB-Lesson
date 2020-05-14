@@ -1,0 +1,46 @@
+
+SELECT * FROM V$STAT;
+-- TRANSACTION과 읽기일관성 (READ CONSISTENCY)
+    -- SESSION 1
+/*(1)*/
+UPDATE EMP SET SAL = 0 WHERE DEPTNO = 20;
+
+/*(3)*/
+SELECT DEPTNO, ENAME, SAL FROM EMP
+WHERE DEPTNO = 20;
+
+/*(4)*/
+COMMIT;
+
+/*(6) 3번 재실행 */
+
+-- SQL SCRIPT 불러오기 
+@@C:\Users\HP\Documents\데이터베이스\createTable.sql;
+
+select*from SYSTEM13;
+
+-- 테이블 초기화
+drop table emp;
+@@C:\Users\HP\Documents\데이터베이스\createEmp.sql;
+select * from emp;
+COMMIT;
+
+-- TRANSACTION과 ROW LEVEL LOCK
+    -- SESSION 1
+/*(1)*/
+UPDATE EMP SET SAL = 9999 WHERE DEPTNO = 10;
+
+/*(4)*/
+COMMIT;
+
+-- SELECT * FOR UPDATE (ROW LEVEL LOCK)
+-- (1)
+SELECT * FROM EMP WHERE DEPTNO = 10 FOR UPDATE[WAIT];
+COMMIT;
+
+-- (2)
+SELECT * FROM EMP WHERE DEPTNO = 10 FOR UPDATE;
+ROLLBACK;
+
+-- (3)
+SELECT * FROM EMP WHERE DEPTNO = 10 FOR UPDATE WAIT 10

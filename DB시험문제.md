@@ -217,7 +217,7 @@ pl/sql
 
 ( EQUI-JOIN )
 
-+ DNAME, ENAME, JOB, SAL을 EQUI-JOIN을 통해 구하시오.
++ DNAME, ENAME, JOB, SAL을 EQUI-JOIN을 통해 구하시오. (공통 칼럼 DEPTNO)
 + 직업이 MANAGER이거나 CLERK인 사람들의 DNAME, ENAME, JOB, SAL을 EQUI-JOIN을 통해 구하고 DNAME으로 정렬하시오.
 
 ( NON-EQUI-JOIN )
